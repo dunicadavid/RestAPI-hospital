@@ -15,7 +15,7 @@ Pachete utilizate:
 Arhitectura utilizata: un restAPI realizat in NodeJS cu Express si MySQL pentru stocarea datelor.
 
 Am impartit aplicatia in 4 foldere : routes (este handlerul pentru rutele requesturilor), controller (logica propriu zisa cu functiile (req,res,next)),
-models (contine clase cu constructori si metode in interiorul carora se fac queryurile pentru baza de date) si __test__ ce contine testele pentru integritatea requesturilor.
+models (contine clase cu constructori si metode in interiorul carora se fac queryurile pentru baza de date) si \_test\_ ce contine testele pentru integritatea requesturilor.
 
 Avem 4 metode de MIDDLEWARE :
     -> decodeToken: verifica daca requestul se face de catre un angajat authentificat (tokenul se transmite prin _req.headers.authorization_).
@@ -24,16 +24,16 @@ Avem 4 metode de MIDDLEWARE :
     -> verifyIfIdIsDoctor: se verifica daca id-ul furnizat in body indeplineste contitia ca ii apartine unui doctor (se verifica in db).
 
 Requesturi:<br />
-    -> *employee/login*  : nu necesita middleware, se da un body cu email si parola si se returneaza un json unde se gaseste token-ul.
-    
+    -> \*employee/login*  : nu necesita middleware, se da un body cu email si parola si se returneaza un json unde se gaseste token-ul.
+
     -> *employee/register*  : nu necesita middleware, se da un body cu email, parola, nume, rol ca acestea sa fie introduse in baza de
-     date dupa ce parola este incriptata.
+    date dupa ce parola este incriptata.
     
     -> *employee/id=:id* *employee/update* *employee/delete* operatiile CRUD,
     aceste requesturi necesita 2 middlewareuri : decodeToken si apoi authorizeCheck(['General manager']).
 
     -> *employee/report?page= &limit= * : necesita aceleasi doua middlewareuri ca mai sus; este de mentionat ca am introdus si
-     paginare avand in vedere ca lista poate deveni foarte lunga.
+    paginare avand in vedere ca lista poate deveni foarte lunga.
 
     -> *pacient/create* *pacient/id=:id* *pacient/update* *pacient/delete* : operatiile CRUD pentru managementul pacientilor, necesita 
     doua middelwareuri: decodeToken si apoi authorizeCheck(['General manager', 'Doctor']).
@@ -48,7 +48,7 @@ Requesturi:<br />
     authorizeCheck(['Doctor']) si verifyIfIdIsDoctor (pentru a ne asigura ca id-ul trimis in body este al unui doctor).
 
     -> *treatment/id=:id* *treatment/update* *treatment/delete* :Operatiile CRUD pentru managementul tratamentelor, gestinate de doctor si
-     managerul general
+    managerul general
 
     -> *treatment/applied* : poate fi realizat doar de asistent, deci folosim 3 middlewares: decodeToken si apoi authorizeCheck(['Assistant']) si 
     verifyIfIdIsAssistant

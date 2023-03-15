@@ -24,28 +24,28 @@ Avem 4 metode de MIDDLEWARE :
     -> verifyIfIdIsDoctor: se verifica daca id-ul furnizat in body indeplineste contitia ca ii apartine unui doctor (se verifica in db).
 
 Requesturi:<br />
-    -> \*employee/login*  : nu necesita middleware, se da un body cu email si parola si se returneaza un json unde se gaseste token-ul.
+    -> \*employee/login*  : nu necesita middleware, se da un body cu email si parola si se returneaza un json unde se gaseste token-ul.<br />
     -> \*employee/register*  : nu necesita middleware, se da un body cu email, parola, nume, rol ca acestea sa fie introduse in baza de
-    date dupa ce parola este incriptata.
+    date dupa ce parola este incriptata.<br />
     -> \*employee/id=:id* \*employee/update* \*employee/delete* operatiile CRUD,
-    aceste requesturi necesita 2 middlewareuri : decodeToken si apoi authorizeCheck(['General manager']).
+    aceste requesturi necesita 2 middlewareuri : decodeToken si apoi authorizeCheck(['General manager']).<br />
     -> \*employee/report?page= &limit= * : necesita aceleasi doua middlewareuri ca mai sus; este de mentionat ca am introdus si
-    paginare avand in vedere ca lista poate deveni foarte lunga.
+    paginare avand in vedere ca lista poate deveni foarte lunga.<br />
     -> \*pacient/create* \*pacient/id=:id* \*pacient/update* \*pacient/delete* : operatiile CRUD pentru managementul pacientilor, necesita 
-    doua middelwareuri: decodeToken si apoi authorizeCheck(['General manager', 'Doctor']).
+    doua middelwareuri: decodeToken si apoi authorizeCheck(['General manager', 'Doctor']).<br />
     -> \*pacient/report?page= &limit= * : ofera istoricul medical al unui pacient primit in body, necesita doua middelwareuri: decodeToken 
-    si apoi authorizeCheck(['General manager', 'Doctor']), de asemenea contine paginare.
+    si apoi authorizeCheck(['General manager', 'Doctor']), de asemenea contine paginare.<br />
     -> \*pacient/assign-assistant* : aceleasi doua middlewares ca mai sus plus verifyIfIdIsAssistant, deoarece trebuie asigurat ca sunt 
-    asignati doar asistenti.
+    asignati doar asistenti.<br />
     -> \*treatment/create*: tratamentul poate fi creat doar de un doctor, astfel utilizam 3 middlewares: decodeToken si apoi 
-    authorizeCheck(['Doctor']) si verifyIfIdIsDoctor (pentru a ne asigura ca id-ul trimis in body este al unui doctor).
+    authorizeCheck(['Doctor']) si verifyIfIdIsDoctor (pentru a ne asigura ca id-ul trimis in body este al unui doctor).<br />
     -> \*treatment/id=:id* \*treatment/update* \*treatment/delete* :Operatiile CRUD pentru managementul tratamentelor, gestinate de doctor si
-    managerul general
+    managerul general<br />
     -> \*treatment/applied* : poate fi realizat doar de asistent, deci folosim 3 middlewares: decodeToken si apoi authorizeCheck(['Assistant']) si 
-    verifyIfIdIsAssistant
+    verifyIfIdIsAssistant<br />
 
 
-Baza de date contine 4 tabele:
+Baza de date contine 4 tabele:<br />
 
     registration (idregistration(PK), email (VARCHAR UNIQUE), password (VARCHAR-encriped String))
 

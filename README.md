@@ -23,7 +23,7 @@ Avem 4 metode de MIDDLEWARE :
     -> verifyIfIdIsAssistant: se verifica daca id-ul furnizat in body indeplineste contitia ca ii apartine unui asistent (se verifica in db).
     -> verifyIfIdIsDoctor: se verifica daca id-ul furnizat in body indeplineste contitia ca ii apartine unui doctor (se verifica in db).
 
-Requesturi:__ 
+Requesturi:<br />
     -> *employee/login*  : nu necesita middleware, se da un body cu email si parola si se returneaza un json unde se gaseste token-ul.
     
     -> *employee/register*  : nu necesita middleware, se da un body cu email, parola, nume, rol ca acestea sa fie introduse in baza de

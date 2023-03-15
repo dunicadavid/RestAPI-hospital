@@ -10,10 +10,10 @@ router.route('/delete').delete(decodeToken,authorizeCheck(['General manager']),e
 
 //Login & register
 router.route('/register').post(employeeControllers.registerEmployee);                                                   //[DONE]
-router.route('/login').get(employeeControllers.login);
+router.route('/login').get(employeeControllers.login);                                                                  //[DONE]
 
 
 //A report containing the list of all the Doctors and the associated patients and a section for statistics data
-router.route('/report').get(decodeToken,authorizeCheck(['General manager']),employeeControllers.getEmployeeReport);
+router.route('/report').get(decodeToken,authorizeCheck(['General manager']),employeeControllers.getEmployeeReport);     //[DONE]
 
 module.exports = router;

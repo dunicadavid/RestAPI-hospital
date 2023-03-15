@@ -4,7 +4,7 @@
   "description": "Homework rest api",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon server.js",
     "start": "node server.js"
   },
@@ -19,5 +19,9 @@
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.2.0",
     "nodemon": "^2.0.21"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3"
   }
 }

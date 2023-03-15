@@ -2,7 +2,9 @@ const Treatment = require('../models/Treatment');
 
 exports.createTreatment = async (req, res, next) => {
     try {
-        const { description , date , doctor , pacient } = req.body;
+        const { description , doctor , pacient } = req.body;
+        const date = new Date().toJSON().slice(0, 10);
+        console.log(date);
 
         //input integrity check//
         if (typeof doctor !== 'number' || typeof pacient !== 'number') {
@@ -10,6 +12,7 @@ exports.createTreatment = async (req, res, next) => {
         } else if( typeof description !== 'string'){
             res.status(422).json({ message: 'Description must be a string.' });
         } else {
+
             let treatment = new Treatment(description , date , doctor , pacient);
 
             treatment = await treatment.createTreatment();
@@ -50,7 +53,8 @@ exports.getTreatmentInfo = async (req, res, next) => {
 
 exports.updateTreatment = async (req, res, next) => {
     try {
-        const { idtreatment, description , date , doctor , pacient } = req.body;
+        const { idtreatment, description , doctor , pacient } = req.body;
+        const date = new Date().toJSON().slice(0, 10);
 
         //input integrity check//
         if (typeof idtreatment !== 'number' || typeof doctor !== 'number' || typeof pacient !== 'number') {

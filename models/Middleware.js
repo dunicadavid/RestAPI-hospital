@@ -52,10 +52,33 @@ class Middleware {
             } else {
                 let [result, _] = await Employee.getEmployeeInfo(idemployee);
                 if(result.length === 0) {
-                    res.status(422).json({ message: 'There is no Assistant with that Id.' });
+                    res.status(422).json({ message: 'There is no Employee with that Id.' });
                 } else {
                     if(result[0].role !== 'Assistant') {
                         res.status(422).json({ message: `Employee with id#${idemployee} is not an assistant.` });
+                    } else {
+                        next();
+                    }
+                }
+            }
+        } catch (err) {
+            console.log(err);
+            return res.json({ success: 0, message: "Internal Error." });
+        }
+    }
+
+    async verifyIfIdIsDoctor(req, res, next) {
+        const { doctor } = req.body;
+        try {
+            if (typeof doctor !== 'number') {
+                res.status(422).json({ message: 'Id must be a number.' });
+            } else {
+                let [result, _] = await Employee.getEmployeeInfo(doctor);
+                if(result.length === 0) {
+                    res.status(422).json({ message: 'There is no Employee with that Id.' });
+                } else {
+                    if(result[0].role !== 'Doctor') {
+                        res.status(422).json({ message: `Employee with id#${doctor} is not an doctor.` });
                     } else {
                         next();
                     }
